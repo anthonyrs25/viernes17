@@ -1,7 +1,12 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Module } from '@nestjs/common';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { UsuariosModule } from './usuarios.module';
+
+@Module({
+  imports: [ UsuariosModule ]
+})
 
 @Injectable()
 export class UsuariosService {
@@ -27,3 +32,4 @@ constructor(private readonly prismaUsuarios: PrismaService) {}
     return this.prismaUsuarios.user.delete({where: {id}});
   }
 }
+
